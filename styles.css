@@ -1661,6 +1661,17 @@ select {
     .hero-3d-visual {
         height: 350px;
         margin-top: 30px;
+        overflow: hidden;
+    }
+
+    .hero-3d-container {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .hero-3d-container iframe {
+        height: calc(100% + 50px);
+        width: 100%;
     }
 
     .hero-bg-text {
