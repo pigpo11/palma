@@ -1673,6 +1673,10 @@ select {
         top: 30%;
     }
 
+    .hero-3d-container::after {
+        display: none;
+    }
+
     .hero-scroll {
         bottom: 20px;
     }
