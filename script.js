@@ -353,7 +353,7 @@ function initCounterAnimation() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const counter = entry.target;
-                const target = parseInt(counter.dataset.target);
+                const target = parseFloat(counter.dataset.target);
                 animateCounter(counter, target);
                 observer.unobserve(counter);
             }
@@ -366,19 +366,24 @@ function initCounterAnimation() {
         const duration = 2000;
         const start = 0;
         const startTime = performance.now();
+        const hasDecimal = target % 1 !== 0;
 
         function update(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
             const easeOut = 1 - Math.pow(1 - progress, 3);
-            const current = Math.floor(start + (target - start) * easeOut);
+            let current = start + (target - start) * easeOut;
 
-            element.textContent = current;
+            if (hasDecimal) {
+                element.textContent = current.toFixed(1);
+            } else {
+                element.textContent = Math.floor(current);
+            }
 
             if (progress < 1) {
                 requestAnimationFrame(update);
             } else {
-                element.textContent = target;
+                element.textContent = hasDecimal ? target.toFixed(1) : target;
             }
         }
 
